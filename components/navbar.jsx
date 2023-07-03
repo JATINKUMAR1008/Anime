@@ -5,13 +5,18 @@ import { SocialIcon } from "react-social-icons";
 import { FaRandom } from "react-icons/fa";
 import { HiSignal } from "react-icons/hi2";
 import { FaFilter } from 'react-icons/fa'
+import { useRouter } from "next/router";
+import { useAuth } from "@/context/authContext";
+import { IoLogOutOutline } from "react-icons/io5";
 const Navbar = ({ toggle }) => {
+  const router = useRouter()
+  const { currentUser,signout} = useAuth()
   const [lang, setLang] = useState("eng");
   const [sideSearch, setSideSearch] = useState(false);
 
   return (
-    <div className="flex w-full h-19 bg-slate-500 items-center justify-between  p-3 xl:bg-transparent flex-wrap ">
-      <div className="flex items-center">
+    <div className="sm:absolute z-20 top-0 flex w-full h-18 bg-slate-500 items-center justify-between  xl:bg-transparent ">
+      <div className="flex items-center p-3">
         <FaBars size={25} className="cursor-pointer" onClick={toggle} />
         <span className="text-2xl ml-7 text-white font-Kanit font-bold cursor-pointer">
           Animania
@@ -98,17 +103,24 @@ const Navbar = ({ toggle }) => {
           </button>
         </div>
       </div>
-      <div className=" flex items-center gap-4 ">
+      <div className=" flex items-center gap-4 p-3 ">
         <BiSearch
           size={25}
           className="lg:hidden block cursor-pointer"
           onClick={() => setSideSearch(!sideSearch)}
         />
-        <button className="w-20 h-11 flex items-center justify-center rounded-md cursor-pointer bg-gray-700">
+        {!currentUser?<button className="w-20 h-11 flex items-center justify-center rounded-md cursor-pointer bg-gray-700" onClick={()=>router.push('/login')}>
           Login
-        </button>
+        </button>:
+        <button className="w-11 h-11 flex items-center justify-center rounded-md cursor-pointer bg-gray-700" onClick={signout}>
+       <IoLogOutOutline size={24} />
+                    
+               
+      </button>
+         }
+        
       </div>
-      <div className={sideSearch?"w-full bg-slate-500 h-12 mt-2 flex gap-3 items-center ease-linear duration-100":"hidden"}>
+      <div className={sideSearch?"absolute w-full bg-slate-500 h-18 top-16  flex gap-3 items-center ease-linear duration-100 p-3 z-10":"absolute -z-10 w-full bg-slate-500 h-20 -top-20  flex gap-3 items-center ease-linear duration-100 p-3"}>
         <button className="flex w-[40px] h-[40px] rounded-md bg-gray-700 justify-center items-center">
 <FaFilter size={15}/>
         </button>

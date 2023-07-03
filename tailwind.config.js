@@ -33,8 +33,8 @@ module.exports = {
         Nunito: ['Nunito', 'sans-serif']
       },
       boxShadow: {
-        '3xl-inset': '0px 0px 1000px 12rem black inset',
-        'sm-inset': '0px 0px 200px 2rem black inset'
+        '3xl-inset': ' inset 0px -32px 11px -6px rgba(0,0,0,1)',
+        'sm-inset': '0px 0px 200px 2rem black inset',
       }
     },
   },

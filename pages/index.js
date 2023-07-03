@@ -5,51 +5,49 @@ import handler from "./api/zoro";
 import axios from "axios";
 import Navbar from "@/components/navbar";
 import Sidebar from "@/components/Sidebar";
-import Carosuel from "@/components/Carosuel";
+
+import { useAuth } from "@/context/authContext";
+import { useRouter } from "next/router";
+import Horizontal from "@/components/Horizontal";
+import Spotlight from "@/components/Spotlight";
+import List from "@/components/List";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const router = useRouter()
   const [url, setUrl] = useState(null);
   const [wait, setWait] = useState(false);
   const [open,IsOpen] = useState(false)
   const toggle = () =>{
     IsOpen(!open)
   }
-  var obj ={
-    "id": 51535
-  }
- 
-  var link_data = {};
-  
-
-  const data = async () => {
-    const response = await fetch("/api/zoro");
-    link_data = await response.json();
-    if (link_data) {
-      setUrl(link_data);
-      console.log(url?.iframeLink.link);
-    }
-
-    check();
-  };
-  const check = () => {
-    if (url) {
-      setWait(false);
-    }
-  };
+  const { currentUser,isLoading } = useAuth()
+  const menu = ['Top Airing','Most Popular','Most Favorite','Latest Completed']
   useEffect(() => {
-    data();
+    if (!isLoading && !currentUser) {
+      router.push("/login");
+    }
    
-    check
-  }, [!url]);
+    if(String(currentUser?.profileStatus) === "unComplete" && String(currentUser.displayName)=== ""){
+      router.push("/form")
+    }
+    
+   
+    
+  }, [currentUser, isLoading]);
   return wait ? (
     <>true</>
   ) : (
     <>
       <Navbar toggle={toggle}/>
       <Sidebar toggle={toggle} isOpen={open}/>
-      <Carosuel/>
-      {/*<iframe
+      <Spotlight/>
+       <Horizontal/>
+       {menu.map((value,key)=>(
+        <List heading={value} key={key}/>
+       ))}
+     {/*<iframe
         width={"720"}
         height={"560"}
         src={url.iframeLink.link}

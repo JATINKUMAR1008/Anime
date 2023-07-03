@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { getAnimeInfoByName, getEpList, zoroSearch,getEpisodeServers,getStreamsById } from "zoro-to-api"
+import { getAnimeInfoByName, getEpList, zoroSearch,getEpisodeServers,getStreamsById, } from "zoro-to-api"
+
 
 
 const handler = async(req,res)=>{
@@ -10,8 +11,8 @@ const handler = async(req,res)=>{
     let episodeOne = episodes.episodes[0];
     let episodeOneServers = await getEpisodeServers(episodeOne.epId);
     let iframeLink = await getStreamsById(episodeOneServers.serversSub[0].serverId);
-    console.log("called",iframeLink)
-    NextResponse.json(iframeLink)
+    console.log("called",episodeOneServers)
+    NextResponse.json(episodeOneServers)
     res.status(200).json({ iframeLink })
 }
 
