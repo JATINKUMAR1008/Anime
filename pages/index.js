@@ -13,6 +13,7 @@ import Spotlight from "@/components/Spotlight";
 import List from "@/components/List";
 
 import Footer from "@/components/Footer";
+import Loading from "@/components/Loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -59,7 +60,7 @@ export default function Home() {
     fetchData();
   },[!url]);
   return !wait ? (
-    <>true</>
+    <Loading/>
   ) : (
     <>
       <Navbar toggle={toggle} />
