@@ -14,11 +14,16 @@ const Sidebar = ({toggle,isOpen}) => {
         <button className='w-[120px] h-8 rounded-3xl bg-gray-500 flex items-center  text-sm mt-5' onClick={toggle}>
             <RiArrowDropLeftLine size={30}/><span className='relative left-[-5px] bottom-[1px]' >Close menu</span>
         </button>
-        <span className='mt-5 flex items-center cursor-pointer w-full h-full justify-center'>
+        {currentUser?<span className='mt-5 flex items-center cursor-pointer w-full h-full justify-center'>
             <Link href={`/account/${currentUser?.uid}`} className='flex items-center gap-4' title='Account'>
             <BiUser size={20}/>    Hi, { currentUser?.displayName}
             </Link>
-        </span>
+        </span>:<>
+        <Link href="/login" className='mt-5 flex items-center cursor-pointer w-full h-full justify-center '>
+            Login
+        </Link>
+        </>}
+        
         <button className="px-6 py-3 mt-4 rounded-2xl bg-gray-400 text-[12px] ">Donate</button>
         <button className="px-6 py-3 mt-1 rounded-2xl bg-gray-900 text-[12px] flex items-center justify-center gap-2"><IoIosChatbubbles size={20}/>Community</button>
         <div className='flex-col mt-7 justify-center ' >

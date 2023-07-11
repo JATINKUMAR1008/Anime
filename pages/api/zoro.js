@@ -12,7 +12,7 @@ const handler = async(req,res)=>{
     let episodeOneServers = await getEpisodeServers(episodeOne.epId);
     let iframeLink = await getStreamsById(episodeOneServers.serversSub[0].serverId);
     console.log("called",episodeOneServers)
-    NextResponse.json(episodeOneServers)
+    NextResponse.json(iframeLink)
     res.status(200).json({ iframeLink })
 }
 

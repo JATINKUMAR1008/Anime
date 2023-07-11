@@ -18,12 +18,12 @@ const Spotlight = () => {
         setDirection('rg')
         
         setTimeout(()=>{
-            if(index < 11){
+            if(index < list.temp.length -1){
                 setDirection('lf')
                 setIndex(Number(index)+1)
                 console.log(index)
                 console.log(index)
-            }if(index === 11 ){
+            }if(index === list.temp.length -1 ){
                 setIndex(0)
             }
             console.log(index)
@@ -48,7 +48,7 @@ const Spotlight = () => {
             setIndex(Number(index)-1)
             console.log(index)
         }if(index === 0){
-            setIndex(11)
+            setIndex(list.temp.length -1)
         }
         
        },200)
@@ -83,19 +83,22 @@ const Spotlight = () => {
         return string
       };
     const increament = () =>{
-        if(index < 11){
+        if(index < list.temp.length -1){
             
             setIndex(Number(index)+1)
             
-        }if(index === 11 ){
+        }if(index === list.temp.length -1 ){
             setIndex(0)
         }
         console.log(index)
     }
     useEffect(()=>{
-        setTimeout(()=>{
-            increament()
-        },3600*2)
+        if(list){
+            setTimeout(()=>{
+                increament()
+            },3600*2)
+        }
+        
     },[index])
     useEffect(()=>{
        fetch_Data()
@@ -104,14 +107,14 @@ const Spotlight = () => {
   return !load?(
     <div className='w-full min-h-[50vh] max-h-[90vh] sm:h-[80vh] h-[50vh] shadow-3xl-inset'>
         <div className={wait&&direction === 'rg'?' w-full h-full relative top-0  -z-20 left-[-100%] ease-linear duration-200':wait && direction === 'lf'? ' w-full h-full relative top-0  -z-20 left-[100%] ease-linear duration-200':' w-full h-full relative top-0  -z-20 left-0 ease-linear duration-200'}>
-            <img src={list.temp[index]?.image} className='w-full h-full object-cover opacity-25'/>
+            <img src={list.temp[index]?.image} className='w-full h-full object-cover opacity-50'/>
         </div>
         <div className='relative w-full h-full  sm:top-[-80vh] top-[-50vh] flex items-center justify-between left-0 z-10'>
             <div className='p-5 flex flex-col text-left'>
             <span className='p-1 text-green-500 my-2'>
                 Spotlight #{list.temp[index]?.index}
             </span>
-            <span className='md:text-4xl text-2xl'>
+            <span className='md:text-4xl text-xl'>
                 {list.temp[index]?.title}
             </span>
             <span className='sm:flex gap-3 hidden mt-4'>

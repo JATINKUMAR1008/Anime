@@ -9,16 +9,16 @@ const handler = async (req, res) => {
     let temp ={}
     switch (s.gen.heading) {
         case "Top Airing":
-            temp = await zAnime.airing()
+            temp = await zAnime.airing(s.page.no)
             break;
         case "Most Popular":
-            temp = await zAnime.popular()
+            temp = await zAnime.popular(s.page.no)
             break;
         case "Most Favorite":
-            temp = await zAnime.favourite()
+            temp = await zAnime.favourite(s.page.no)
             break;
         case "Latest Completed":
-            temp = await zAnime.latest()
+            temp = await zAnime.latest(s.page.no)
             break;
         default:
             break;
