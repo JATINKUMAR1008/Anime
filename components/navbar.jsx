@@ -18,7 +18,7 @@ const Navbar = ({ toggle }) => {
     <div className="sm:absolute z-20 top-0 flex w-full h-18 bg-slate-500 items-center justify-between  xl:bg-transparent ">
       <div className="flex items-center p-3">
         <FaBars size={25} className="cursor-pointer" onClick={toggle} />
-        <span className="text-2xl ml-7 text-white font-Kanit font-bold cursor-pointer">
+        <span className="text-2xl ml-7 text-white font-Kanit font-bold cursor-pointer" onClick={()=>router.push('/')}>
           Animania
           <span className="text-xl font-Nunito ml-1 font-bold">.to</span>
         </span>
