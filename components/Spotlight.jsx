@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { AiFillPlayCircle, AiFillClockCircle  } from 'react-icons/ai'
 import {  BsFillCalendarFill } from 'react-icons/bs'
 import { MdKeyboardArrowRight,MdKeyboardArrowLeft } from 'react-icons/md'
+import Loading from './Loading'
 const Spotlight = () => {
     const [list,setList] = useState(null)
     const [load,setLoad] = useState(true)
@@ -166,7 +167,7 @@ const Spotlight = () => {
             </div>
         </div>
     </div>
-  ):(<>Loading</>)
+  ):(<Loading/>)
 }
 
 export default Spotlight
